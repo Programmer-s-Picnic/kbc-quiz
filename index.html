@@ -26,18 +26,40 @@
         </div>
         <div id="divGame" class="hide">
             <h1>Game</h1>
-
+            <label>Time Left</label>
+            <label id="lblTimer">30</label>
         </div>
     </div>
     <script>
         const divstart = document.querySelector("#divStart");
         const divgame = document.querySelector("#divGame");
+        const lbltimer = document.querySelector("#lblTimer");
+
+        let counter = 30;
+        let timerId = null;
+        function startTimer() {
+            counter = 30;
+            lbltimer.textContent = counter;
+
+            timerId = setInterval(function () {
+                counter--;
+                lbltimer.innerText = counter;
+
+                if (counter === 0) {
+                    clearInterval(timerId);
+                    alert("Time up!");
+                }
+            }, 1000);
+        }
+
+
         function doHide(element) {
             element.classList.add("hide");
 
         }
         function doShow(element) {
             element.classList.remove("hide");
+            startTimer();
 
         }
     </script>
