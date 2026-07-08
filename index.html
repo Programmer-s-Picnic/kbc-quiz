@@ -27,7 +27,7 @@
         <div id="divGame" class="hide">
             <h1>Game</h1>
             <label>Time Left</label>
-            <label id="lblTimer">30</label>
+            <label id="lblTimer"></label>
         </div>
     </div>
     <script>
@@ -43,7 +43,7 @@
 
             timerId = setInterval(function () {
                 counter--;
-                lbltimer.innerText = counter;
+                lbltimer.textContent = counter;
 
                 if (counter === 0) {
                     clearInterval(timerId);
