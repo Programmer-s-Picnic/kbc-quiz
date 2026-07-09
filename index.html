@@ -17,6 +17,10 @@
             display: none;
         }
 
+        .hiddenRadio {
+            visibility: hidden;
+        }
+
         #lblTimer {
             font-size: 30px;
             font-weight: bold;
@@ -61,10 +65,7 @@
                 <label id="lbld" for="rdd">Option D</label>
             </div>
 
-            <div>
-                <input type="radio" name="option" id="rde" checked>
-                <label id="lble" for="rde">No option selected</label>
-            </div>
+            <input type="radio" name="option" id="rde" class="hiddenRadio" checked>
         </div>
 
     </div>
