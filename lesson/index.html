@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KBC App 0 to Infinity Lesson</title>
+
+    <meta name="description" content="A complete beginner-friendly 0 to Infinity lesson for building a KBC style quiz app using HTML, CSS, JavaScript, JSON, timer, rewards, radio buttons and speech.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        header {
+            background:
+                radial-gradient(circle at top, #1e3a8a, #020617 70%),
+                linear-gradient(135deg, #020617, #111827);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #facc15;
+            font-size: 42px;
+            text-shadow: 0 0 14px rgba(250, 204, 21, 0.8);
+        }
+
+        header p {
+            max-width: 850px;
+            margin: 18px auto 0;
+            font-size: 19px;
+            color: #e0f2fe;
+        }
+
+        .container {
+            width: 94%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 0 60px;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 18px;
+            padding: 28px;
+            margin: 24px 0;
+            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: #1e3a8a;
+            margin-top: 0;
+            border-left: 6px solid #facc15;
+            padding-left: 12px;
+        }
+
+        h3 {
+            color: #0f172a;
+            margin-top: 28px;
+        }
+
+        .goal-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 12px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .goal-list li {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .stage {
+            background: #ffffff;
+            border: 1px solid #dbeafe;
+            border-radius: 18px;
+            margin: 28px 0;
+            padding: 24px;
+            box-shadow: 0 8px 22px rgba(30, 58, 138, 0.07);
+        }
+
+        .stage h2 {
+            margin-bottom: 10px;
+        }
+
+        code {
+            background: #e0f2fe;
+            color: #0f172a;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        pre {
+            background: #020617;
+            color: #e5e7eb;
+            padding: 20px;
+            border-radius: 16px;
+            overflow-x: auto;
+            font-size: 15px;
+            line-height: 1.6;
+            border: 2px solid #1e3a8a;
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            font-weight: normal;
+        }
+
+        .note {
+            background: #fffbeb;
+            border-left: 6px solid #facc15;
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin: 18px 0;
+        }
+
+        .final-section {
+            background:
+                radial-gradient(circle at top, #1e3a8a, #020617 70%),
+                linear-gradient(135deg, #020617, #111827);
+            color: white;
+            border-radius: 24px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .final-section h2 {
+            color: #facc15;
+            border-left-color: #facc15;
+        }
+
+        .task-box {
+            background: #ecfeff;
+            border: 1px solid #67e8f9;
+            padding: 18px;
+            border-radius: 16px;
+            margin: 16px 0;
+        }
+
+        footer {
+            background: #020617;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 24px;
+        }
+
+        .top-button {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            background: #facc15;
+            color: #111827;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
+        }
+
+        @media (max-width: 700px) {
+            header h1 {
+                font-size: 30px;
+            }
+
+            header p {
+                font-size: 16px;
+            }
+
+            .lesson-card,
+            .stage {
+                padding: 18px;
+            }
+
+            pre {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body id="top">
+
+    <header>
+        <h1>KBC App: 0 to Infinity Lesson</h1>
+        <p>
+            Build a KBC style quiz app using HTML, CSS, JavaScript, JSON data,
+            radio buttons, timer, rewards and speaking voice.
+        </p>
+    </header>
+
+    <main class="container">
+
+        <section class="lesson-card">
+            <h2>What We Will Build</h2>
+
+            <p>
+                We will build a simple KBC style quiz app from zero. The app starts from a basic
+                HTML page and slowly grows into a complete interactive quiz project.
+            </p>
+
+            <ul class="goal-list">
+                <li>Start screen</li>
+                <li>Game screen</li>
+                <li>15 JSON questions</li>
+                <li>Radio button options</li>
+                <li>Hidden default radio</li>
+                <li>30 seconds timer</li>
+                <li>Answer checking</li>
+                <li>Rewards JSON</li>
+                <li>Speaking question</li>
+                <li>KBC style CSS</li>
+            </ul>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 0: Basic HTML Page</h2>
+
+            <p>
+                First, create a simple HTML page. This is the foundation of the project.
+            </p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;KBC&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;h1&gt;KBC&lt;/h1&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 1: Add Start Screen and Game Screen</h2>
+
+            <p>
+                We need two screens: <code>divStart</code> and <code>divGame</code>.
+                At first, the game screen is hidden.
+            </p>
+
+<pre><code>&lt;div class="container"&gt;
+
+    &lt;div id="divStart"&gt;
+        &lt;h1&gt;KBC&lt;/h1&gt;
+        &lt;button&gt;Start&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div id="divGame" class="hide"&gt;
+        &lt;h1&gt;Game&lt;/h1&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+
+<pre><code>.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hide {
+    display: none;
+}</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 2: Hide and Show Elements</h2>
+
+            <p>
+                JavaScript will hide the start screen and show the game screen.
+            </p>
+
+<pre><code>const divstart = document.querySelector("#divStart");
+const divgame = document.querySelector("#divGame");
+
+function doHide(element) {
+    element.classList.add("hide");
+}
+
+function doShow(element) {
+    element.classList.remove("hide");
+}</code></pre>
+
+            <p>Connect the functions to the Start button:</p>
+
+<pre><code>&lt;button onclick="doHide(divstart);doShow(divgame)"&gt;Start&lt;/button&gt;</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 3: Add Timer Display</h2>
+
+            <p>
+                Inside <code>divGame</code>, add a label to show the remaining time.
+            </p>
+
+<pre><code>&lt;label&gt;Time Left&lt;/label&gt;
+&lt;label id="lblTimer"&gt;30&lt;/label&gt;</code></pre>
+
+            <p>Select it in JavaScript:</p>
+
+<pre><code>const lbltimer = document.querySelector("#lblTimer");</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 4: Add 30 Seconds Counter</h2>
+
+            <p>
+                We will use <code>setInterval()</code> to reduce the counter every second.
+            </p>
+
+<pre><code>let counter = 30;
+let timerId = null;
+
+function startTimer() {
+    clearInterval(timerId);
+
+    counter = 30;
+    lbltimer.textContent = counter;
+
+    timerId = setInterval(function () {
+        counter--;
+        lbltimer.textContent = counter;
+
+        if (counter === 0) {
+            clearInterval(timerId);
+            alert("Time up!");
+        }
+    }, 1000);
+}</code></pre>
+
+            <div class="note">
+                <strong>Important:</strong> 1000 milliseconds means 1 second.
+            </div>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 5: Add Radio Buttons</h2>
+
+            <p>
+                We will create four visible radio buttons for options A, B, C and D.
+            </p>
+
+<pre><code>&lt;div&gt;
+    &lt;input type="radio" name="option" id="rda"&gt;
+    &lt;label id="lbla" for="rda"&gt;Option A&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;input type="radio" name="option" id="rdb"&gt;
+    &lt;label id="lblb" for="rdb"&gt;Option B&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;input type="radio" name="option" id="rdc"&gt;
+    &lt;label id="lblc" for="rdc"&gt;Option C&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;input type="radio" name="option" id="rdd"&gt;
+    &lt;label id="lbld" for="rdd"&gt;Option D&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+
+            <div class="note">
+                All radio buttons have the same <code>name="option"</code>, so only one option can be selected.
+            </div>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 6: Add Hidden 5th Radio Button</h2>
+
+            <p>
+                We use <code>rde</code> to mean “no option selected”.
+            </p>
+
+<pre><code>.hiddenRadio {
+    visibility: hidden;
+    position: absolute;
+}</code></pre>
+
+<pre><code>&lt;input type="radio" name="option" id="rde" class="hiddenRadio" checked&gt;</code></pre>
+
+            <p>
+                Whenever a new question loads, we will write:
+            </p>
+
+<pre><code>rde.checked = true;</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 7: Add Question Area</h2>
+
+<pre><code>&lt;div id="lblQuestion"&gt;&lt;/div&gt;</code></pre>
+
+<pre><code>#lblQuestion {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px;
+    text-align: center;
+}</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 8: Add Questions JSON</h2>
+
+            <p>
+                JSON means JavaScript Object Notation. We store questions as objects inside an array.
+            </p>
+
+<pre><code>const questions = [
+    {
+        "question": "What is the capital of Uttar Pradesh?",
+        "a": "Lucknow",
+        "b": "Kanpur",
+        "c": "Varanasi",
+        "d": "Agra",
+        "answer": "a"
+    },
+    {
+        "question": "What is the capital of Bihar?",
+        "a": "Gaya",
+        "b": "Patna",
+        "c": "Bhagalpur",
+        "d": "Muzaffarpur",
+        "answer": "b"
+    }
+];</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 9: Select Radio Buttons and Labels</h2>
+
+<pre><code>const lblquestion = document.querySelector("#lblQuestion");
+
+const rda = document.querySelector("#rda");
+const rdb = document.querySelector("#rdb");
+const rdc = document.querySelector("#rdc");
+const rdd = document.querySelector("#rdd");
+const rde = document.querySelector("#rde");
+
+const lbla = document.querySelector("#lbla");
+const lblb = document.querySelector("#lblb");
+const lblc = document.querySelector("#lblc");
+const lbld = document.querySelector("#lbld");</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 10: Add Question Index</h2>
+
+            <p>
+                The question index tells us which question is running.
+            </p>
+
+<pre><code>let questionIndex = -1;</code></pre>
+
+            <p>
+                We begin from <code>-1</code> because <code>loadNextQuestion()</code> increases it first.
+            </p>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 11: Create loadNextQuestion()</h2>
+
+<pre><code>function loadNextQuestion() {
+    questionIndex++;
+
+    if (questionIndex >= questions.length) {
+        alert("Quiz finished!");
+        return;
+    }
+
+    const currentQuestion = questions[questionIndex];
+
+    lblquestion.textContent = currentQuestion.question;
+
+    lbla.textContent = currentQuestion.a;
+    lblb.textContent = currentQuestion.b;
+    lblc.textContent = currentQuestion.c;
+    lbld.textContent = currentQuestion.d;
+
+    rde.checked = true;
+
+    startTimer();
+}</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 12: Start Game with First Question</h2>
+
+<pre><code>&lt;button onclick="doHide(divstart);doShow(divgame);loadNextQuestion()"&gt;
+    Start
+&lt;/button&gt;</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 13: Create getSelectedAnswer()</h2>
+
+            <p>
+                This function checks which radio button is selected.
+            </p>
+
+<pre><code>function getSelectedAnswer() {
+    if (rde.checked) {
+        return "";
+    }
+
+    if (rda.checked) {
+        return "a";
+    }
+
+    if (rdb.checked) {
+        return "b";
+    }
+
+    if (rdc.checked) {
+        return "c";
+    }
+
+    if (rdd.checked) {
+        return "d";
+    }
+
+    return "";
+}</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 14: Add Check Answer Button</h2>
+
+<pre><code>&lt;button onclick="checkAnswer()"&gt;Check Answer&lt;/button&gt;</code></pre>
+
+<pre><code>function checkAnswer() {
+    const selectedAnswer = getSelectedAnswer();
+
+    if (selectedAnswer === "") {
+        alert("Please select an answer.");
+        return;
+    }
+
+    const correctAnswer = questions[questionIndex].answer;
+
+    if (selectedAnswer === correctAnswer) {
+        alert("Correct answer!");
+        loadNextQuestion();
+    } else {
+        alert("Wrong answer.");
+    }
+}</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 15: Create endKbc()</h2>
+
+<pre><code>function endKbc(message) {
+    clearInterval(timerId);
+
+    lblquestion.textContent = message;
+
+    lbla.textContent = "";
+    lblb.textContent = "";
+    lblc.textContent = "";
+    lbld.textContent = "";
+
+    rda.style.display = "none";
+    rdb.style.display = "none";
+    rdc.style.display = "none";
+    rdd.style.display = "none";
+
+    lbltimer.textContent = "0";
+}</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 16: Stop Next Question Unless Correct Answer Is Given</h2>
+
+            <p>
+                Do not add a visible Next Question button.
+                The next question should load only from inside <code>checkAnswer()</code>.
+            </p>
+
+<pre><code>if (selectedAnswer === correctAnswer) {
+    alert("Correct answer!");
+    loadNextQuestion();
+} else {
+    endKbc("Wrong answer. KBC ended.");
+}</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 17: Add Rewards JSON</h2>
+
+<pre><code>const rewards = [
+    "₹1,000",
+    "₹2,000",
+    "₹3,000",
+    "₹5,000",
+    "₹10,000",
+    "₹20,000",
+    "₹40,000",
+    "₹80,000",
+    "₹1,60,000",
+    "₹3,20,000",
+    "₹6,40,000",
+    "₹12,50,000",
+    "₹25,00,000",
+    "₹50,00,000",
+    "₹1 Crore"
+];</code></pre>
+
+<pre><code>&lt;label&gt;Current Reward&lt;/label&gt;
+&lt;label id="lblReward"&gt;₹0&lt;/label&gt;</code></pre>
+
+<pre><code>const lblreward = document.querySelector("#lblReward");
+
+lblreward.textContent = rewards[questionIndex];</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 18: Show Winning Amount in endKbc()</h2>
+
+<pre><code>let wonIndex = questionIndex - 1;
+
+if (wonIndex >= 0) {
+    lblreward.textContent = "You won " + rewards[wonIndex];
+} else {
+    lblreward.textContent = "You won ₹0";
+}</code></pre>
+        </section>
+
+        <section class="stage">
+            <h2>Stage 19: Speak the Question and Options</h2>
+
+            <p>
+                We use the browser's speech feature: <code>SpeechSynthesisUtterance</code>.
+            </p>
+
+<pre><code>function speakQuestion() {
+    if (questionIndex &lt; 0 || questionIndex &gt;= questions.length) {
+        return;
+    }
+
+    const currentQuestion = questions[questionIndex];
+
+    const text =
+        "Question for " + rewards[questionIndex] + ". " +
+        currentQuestion.question +
+        ". Option A. " + currentQuestion.a +
+        ". Option B. " + currentQuestion.b +
+        ". Option C. " + currentQuestion.c +
+        ". Option D. " + currentQuestion.d + ".";
+
+    window.speechSynthesis.cancel();
+
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-IN";
+    speech.rate = 0.85;
+    speech.pitch = 1;
+
+    window.speechSynthesis.speak(speech);
+}</code></pre>
+
+            <p>Add a button to repeat the question:</p>
+
+<pre><code>&lt;button onclick="speakQuestion()"&gt;Speak Again&lt;/button&gt;</code></pre>
+        </section>
+
+        <section class="final-section">
+            <h2>Final Full Code</h2>
+
+            <p>
+                Copy this complete code into <code>index.html</code> and run it in your browser.
+            </p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;KBC&lt;/title&gt;
+
+    &lt;style&gt;
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle at top, #1e3a8a, #020617 65%),
+                linear-gradient(135deg, #020617, #111827);
+            color: white;
+        }
+
+        .container {
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .hiddenRadio {
+            visibility: hidden;
+            position: absolute;
+        }
+
+        #divStart,
+        #divGame {
+            width: 95%;
+            max-width: 760px;
+            background: linear-gradient(180deg, #0f172a, #020617);
+            border: 3px solid #facc15;
+            border-radius: 28px;
+            padding: 28px;
+            text-align: center;
+            box-shadow:
+                0 0 25px rgba(250, 204, 21, 0.45),
+                inset 0 0 18px rgba(59, 130, 246, 0.25);
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #facc15;
+            font-size: 42px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 14px rgba(250, 204, 21, 0.8);
+        }
+
+        #lblTimer {
+            display: inline-block;
+            min-width: 58px;
+            margin-left: 10px;
+            padding: 8px 14px;
+            border-radius: 14px;
+            background: #7f1d1d;
+            color: #fecaca;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #lblReward {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #facc15, #f97316);
+            color: #111827;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #lblQuestion {
+            margin: 28px auto;
+            padding: 22px;
+            max-width: 680px;
+            min-height: 90px;
+            background: linear-gradient(180deg, #1e3a8a, #172554);
+            border: 2px solid #93c5fd;
+            border-radius: 22px;
+            color: #ffffff;
+            font-size: 25px;
+            font-weight: bold;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        #divGame &gt; div:not(#lblQuestion) {
+            width: 100%;
+            max-width: 620px;
+            margin: 12px auto;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(90deg, #1e40af, #1e3a8a);
+            border: 2px solid #60a5fa;
+            border-radius: 999px;
+            color: white;
+            text-align: left;
+        }
+
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #facc15;
+            cursor: pointer;
+        }
+
+        #lbla,
+        #lblb,
+        #lblc,
+        #lbld {
+            flex: 1;
+            font-size: 19px;
+            cursor: pointer;
+        }
+
+        button {
+            margin: 8px;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #facc15, #f97316);
+            color: #111827;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div class="container"&gt;
+
+        &lt;div id="divStart"&gt;
+            &lt;h1&gt;KBC&lt;/h1&gt;
+            &lt;button onclick="doHide(divstart);doShow(divgame);loadNextQuestion()"&gt;Start&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div id="divGame" class="hide"&gt;
+            &lt;h1&gt;Game&lt;/h1&gt;
+
+            &lt;label&gt;Time Left&lt;/label&gt;
+            &lt;label id="lblTimer"&gt;30&lt;/label&gt;
+
+            &lt;br&gt;&lt;br&gt;
+
+            &lt;label&gt;Current Reward&lt;/label&gt;
+            &lt;label id="lblReward"&gt;₹0&lt;/label&gt;
+
+            &lt;div id="lblQuestion"&gt;&lt;/div&gt;
+
+            &lt;div&gt;
+                &lt;input type="radio" name="option" id="rda"&gt;
+                &lt;label id="lbla" for="rda"&gt;Option A&lt;/label&gt;
+            &lt;/div&gt;
+
+            &lt;div&gt;
+                &lt;input type="radio" name="option" id="rdb"&gt;
+                &lt;label id="lblb" for="rdb"&gt;Option B&lt;/label&gt;
+            &lt;/div&gt;
+
+            &lt;div&gt;
+                &lt;input type="radio" name="option" id="rdc"&gt;
+                &lt;label id="lblc" for="rdc"&gt;Option C&lt;/label&gt;
+            &lt;/div&gt;
+
+            &lt;div&gt;
+                &lt;input type="radio" name="option" id="rdd"&gt;
+                &lt;label id="lbld" for="rdd"&gt;Option D&lt;/label&gt;
+            &lt;/div&gt;
+
+            &lt;input type="radio" name="option" id="rde" class="hiddenRadio" checked&gt;
+
+            &lt;br&gt;&lt;br&gt;
+
+            &lt;button onclick="speakQuestion()"&gt;Speak Again&lt;/button&gt;
+            &lt;button onclick="checkAnswer()"&gt;Check Answer&lt;/button&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        const questions = [
+            {
+                "question": "What is the capital of Uttar Pradesh?",
+                "a": "Lucknow",
+                "b": "Kanpur",
+                "c": "Varanasi",
+                "d": "Agra",
+                "answer": "a"
+            },
+            {
+                "question": "What is the capital of Bihar?",
+                "a": "Gaya",
+                "b": "Patna",
+                "c": "Bhagalpur",
+                "d": "Muzaffarpur",
+                "answer": "b"
+            },
+            {
+                "question": "What is the capital of Rajasthan?",
+                "a": "Jodhpur",
+                "b": "Udaipur",
+                "c": "Jaipur",
+                "d": "Ajmer",
+                "answer": "c"
+            },
+            {
+                "question": "What is the capital of Madhya Pradesh?",
+                "a": "Indore",
+                "b": "Gwalior",
+                "c": "Jabalpur",
+                "d": "Bhopal",
+                "answer": "d"
+            },
+            {
+                "question": "What is the capital of Maharashtra?",
+                "a": "Mumbai",
+                "b": "Pune",
+                "c": "Nagpur",
+                "d": "Nashik",
+                "answer": "a"
+            },
+            {
+                "question": "What is the capital of Gujarat?",
+                "a": "Ahmedabad",
+                "b": "Gandhinagar",
+                "c": "Surat",
+                "d": "Vadodara",
+                "answer": "b"
+            },
+            {
+                "question": "What is the capital of West Bengal?",
+                "a": "Siliguri",
+                "b": "Howrah",
+                "c": "Kolkata",
+                "d": "Durgapur",
+                "answer": "c"
+            },
+            {
+                "question": "What is the capital of Tamil Nadu?",
+                "a": "Madurai",
+                "b": "Coimbatore",
+                "c": "Tiruchirappalli",
+                "d": "Chennai",
+                "answer": "d"
+            },
+            {
+                "question": "What is the capital of Karnataka?",
+                "a": "Bengaluru",
+                "b": "Mysuru",
+                "c": "Mangaluru",
+                "d": "Hubballi",
+                "answer": "a"
+            },
+            {
+                "question": "What is the capital of Kerala?",
+                "a": "Kochi",
+                "b": "Thiruvananthapuram",
+                "c": "Kozhikode",
+                "d": "Thrissur",
+                "answer": "b"
+            },
+            {
+                "question": "What is the capital of Punjab?",
+                "a": "Ludhiana",
+                "b": "Amritsar",
+                "c": "Chandigarh",
+                "d": "Jalandhar",
+                "answer": "c"
+            },
+            {
+                "question": "What is the capital of Haryana?",
+                "a": "Gurugram",
+                "b": "Faridabad",
+                "c": "Panipat",
+                "d": "Chandigarh",
+                "answer": "d"
+            },
+            {
+                "question": "What is the capital of Assam?",
+                "a": "Dispur",
+                "b": "Guwahati",
+                "c": "Silchar",
+                "d": "Dibrugarh",
+                "answer": "a"
+            },
+            {
+                "question": "What is the capital of Odisha?",
+                "a": "Cuttack",
+                "b": "Bhubaneswar",
+                "c": "Puri",
+                "d": "Rourkela",
+                "answer": "b"
+            },
+            {
+                "question": "What is the capital of Jharkhand?",
+                "a": "Jamshedpur",
+                "b": "Dhanbad",
+                "c": "Ranchi",
+                "d": "Bokaro",
+                "answer": "c"
+            }
+        ];
+
+        const rewards = [
+            "₹1,000",
+            "₹2,000",
+            "₹3,000",
+            "₹5,000",
+            "₹10,000",
+            "₹20,000",
+            "₹40,000",
+            "₹80,000",
+            "₹1,60,000",
+            "₹3,20,000",
+            "₹6,40,000",
+            "₹12,50,000",
+            "₹25,00,000",
+            "₹50,00,000",
+            "₹1 Crore"
+        ];
+
+        const divstart = document.querySelector("#divStart");
+        const divgame = document.querySelector("#divGame");
+
+        const lbltimer = document.querySelector("#lblTimer");
+        const lblreward = document.querySelector("#lblReward");
+        const lblquestion = document.querySelector("#lblQuestion");
+
+        const rda = document.querySelector("#rda");
+        const rdb = document.querySelector("#rdb");
+        const rdc = document.querySelector("#rdc");
+        const rdd = document.querySelector("#rdd");
+        const rde = document.querySelector("#rde");
+
+        const lbla = document.querySelector("#lbla");
+        const lblb = document.querySelector("#lblb");
+        const lblc = document.querySelector("#lblc");
+        const lbld = document.querySelector("#lbld");
+
+        let counter = 30;
+        let timerId = null;
+        let questionIndex = -1;
+
+        function getSelectedAnswer() {
+            if (rde.checked) {
+                return "";
+            }
+
+            if (rda.checked) {
+                return "a";
+            }
+
+            if (rdb.checked) {
+                return "b";
+            }
+
+            if (rdc.checked) {
+                return "c";
+            }
+
+            if (rdd.checked) {
+                return "d";
+            }
+
+            return "";
+        }
+
+        function loadNextQuestion() {
+            questionIndex++;
+
+            if (questionIndex &gt;= questions.length) {
+                endKbc("Congratulations! You completed KBC.");
+                return;
+            }
+
+            const currentQuestion = questions[questionIndex];
+
+            lblquestion.textContent = currentQuestion.question;
+
+            lbla.textContent = currentQuestion.a;
+            lblb.textContent = currentQuestion.b;
+            lblc.textContent = currentQuestion.c;
+            lbld.textContent = currentQuestion.d;
+
+            lblreward.textContent = rewards[questionIndex];
+
+            rda.style.display = "inline";
+            rdb.style.display = "inline";
+            rdc.style.display = "inline";
+            rdd.style.display = "inline";
+
+            rde.checked = true;
+
+            startTimer();
+            speakQuestion();
+        }
+
+        function checkAnswer() {
+            const selectedAnswer = getSelectedAnswer();
+
+            if (selectedAnswer === "") {
+                alert("Please select an answer.");
+                return;
+            }
+
+            const correctAnswer = questions[questionIndex].answer;
+
+            if (selectedAnswer === correctAnswer) {
+                alert("Correct answer!");
+                loadNextQuestion();
+            } else {
+                endKbc("Wrong answer. KBC ended.");
+            }
+        }
+
+        function endKbc(message) {
+            clearInterval(timerId);
+            window.speechSynthesis.cancel();
+
+            let wonIndex = questionIndex - 1;
+
+            if (wonIndex &gt;= 0) {
+                lblreward.textContent = "You won " + rewards[wonIndex];
+            } else {
+                lblreward.textContent = "You won ₹0";
+            }
+
+            lblquestion.textContent = message;
+
+            lbla.textContent = "";
+            lblb.textContent = "";
+            lblc.textContent = "";
+            lbld.textContent = "";
+
+            rda.style.display = "none";
+            rdb.style.display = "none";
+            rdc.style.display = "none";
+            rdd.style.display = "none";
+
+            lbltimer.textContent = "0";
+        }
+
+        function startTimer() {
+            clearInterval(timerId);
+
+            counter = 30;
+            lbltimer.textContent = counter;
+
+            timerId = setInterval(function () {
+                counter--;
+                lbltimer.textContent = counter;
+
+                if (counter === 0) {
+                    endKbc("Time up! KBC ended.");
+                }
+            }, 1000);
+        }
+
+        function speakQuestion() {
+            if (questionIndex &lt; 0 || questionIndex &gt;= questions.length) {
+                return;
+            }
+
+            const currentQuestion = questions[questionIndex];
+
+            const text =
+                "Question for " + rewards[questionIndex] + ". " +
+                currentQuestion.question +
+                ". Option A. " + currentQuestion.a +
+                ". Option B. " + currentQuestion.b +
+                ". Option C. " + currentQuestion.c +
+                ". Option D. " + currentQuestion.d + ".";
+
+            window.speechSynthesis.cancel();
+
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = "en-IN";
+            speech.rate = 0.85;
+            speech.pitch = 1;
+
+            window.speechSynthesis.speak(speech);
+        }
+
+        function doHide(element) {
+            element.classList.add("hide");
+        }
+
+        function doShow(element) {
+            element.classList.remove("hide");
+        }
+    &lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
+        </section>
+
+        <section class="lesson-card">
+            <h2>Important Functions Summary</h2>
+
+            <h3>1. doHide(element)</h3>
+<pre><code>function doHide(element) {
+    element.classList.add("hide");
+}</code></pre>
+
+            <h3>2. doShow(element)</h3>
+<pre><code>function doShow(element) {
+    element.classList.remove("hide");
+}</code></pre>
+
+            <h3>3. startTimer()</h3>
+<pre><code>function startTimer() {
+    clearInterval(timerId);
+
+    counter = 30;
+    lbltimer.textContent = counter;
+
+    timerId = setInterval(function () {
+        counter--;
+        lbltimer.textContent = counter;
+
+        if (counter === 0) {
+            endKbc("Time up! KBC ended.");
+        }
+    }, 1000);
+}</code></pre>
+
+            <h3>4. getSelectedAnswer()</h3>
+<pre><code>function getSelectedAnswer() {
+    if (rde.checked) {
+        return "";
+    }
+
+    if (rda.checked) {
+        return "a";
+    }
+
+    if (rdb.checked) {
+        return "b";
+    }
+
+    if (rdc.checked) {
+        return "c";
+    }
+
+    if (rdd.checked) {
+        return "d";
+    }
+
+    return "";
+}</code></pre>
+
+            <h3>5. loadNextQuestion()</h3>
+<pre><code>function loadNextQuestion() {
+    questionIndex++;
+
+    const currentQuestion = questions[questionIndex];
+
+    lblquestion.textContent = currentQuestion.question;
+
+    lbla.textContent = currentQuestion.a;
+    lblb.textContent = currentQuestion.b;
+    lblc.textContent = currentQuestion.c;
+    lbld.textContent = currentQuestion.d;
+
+    rde.checked = true;
+
+    startTimer();
+}</code></pre>
+        </section>
+
+        <section class="lesson-card">
+            <h2>Student Practice Tasks</h2>
+
+            <div class="task-box">
+                <strong>Task 1:</strong> Change the questions to capitals of all Indian states.
+            </div>
+
+            <div class="task-box">
+                <strong>Task 2:</strong> Change the timer from 30 seconds to 15 seconds.
+            </div>
+
+            <div class="task-box">
+                <strong>Task 3:</strong> Add a Restart button.
+            </div>
+
+            <div class="task-box">
+                <strong>Task 4:</strong> Add background music.
+            </div>
+
+            <div class="task-box">
+                <strong>Task 5:</strong> Add green color for correct answer and red color for wrong answer.
+            </div>
+
+            <div class="task-box">
+                <strong>Task 6:</strong> Add lifelines like 50:50, Audience Poll and Phone a Friend.
+            </div>
+        </section>
+
+        <section class="lesson-card">
+            <h2>Infinity Ideas</h2>
+
+            <ul>
+                <li>Load questions from an external <code>questions.json</code> file.</li>
+                <li>Add player name.</li>
+                <li>Save score in browser local storage.</li>
+                <li>Add leaderboard.</li>
+                <li>Add sound effects.</li>
+                <li>Add animations.</li>
+                <li>Add full-screen mode.</li>
+                <li>Make it a React app.</li>
+                <li>Make it an Angular app.</li>
+                <li>Make it a Flutter app.</li>
+                <li>Add admin panel to create questions.</li>
+                <li>Add login system.</li>
+                <li>Add database.</li>
+                <li>Host it online.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <button class="top-button" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        Top
+    </button>
+
+    <footer>
+        Programmer's Picnic AI-ML Classes by Champak Roy
+    </footer>
+
+</body>
+</html>
