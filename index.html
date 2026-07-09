@@ -34,6 +34,12 @@
             margin: 20px;
             text-align: center;
         }
+
+        button {
+            margin: 5px;
+            padding: 8px 14px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -76,6 +82,7 @@
 
             <br><br>
 
+            <button onclick="speakQuestion()">Speak Again</button>
             <button onclick="checkAnswer()">Check Answer</button>
         </div>
 
@@ -276,6 +283,32 @@
             rde.checked = true;
 
             startTimer();
+
+            speakQuestion();
+        }
+
+        function speakQuestion() {
+            if (questionIndex < 0 || questionIndex >= questions.length) {
+                return;
+            }
+
+            const currentQuestion = questions[questionIndex];
+
+            const text =
+                currentQuestion.question +
+                ". Option A. " + currentQuestion.a +
+                ". Option B. " + currentQuestion.b +
+                ". Option C. " + currentQuestion.c +
+                ". Option D. " + currentQuestion.d + ".";
+
+            window.speechSynthesis.cancel();
+
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = "en-IN";
+            speech.rate = 0.85;
+            speech.pitch = 1;
+
+            window.speechSynthesis.speak(speech);
         }
 
         function checkAnswer() {
@@ -298,6 +331,8 @@
 
         function endKbc(message) {
             clearInterval(timerId);
+
+            window.speechSynthesis.cancel();
 
             lblquestion.textContent = message;
 
@@ -341,4 +376,4 @@
 
 </body>
 
-</html> 
+</html>
