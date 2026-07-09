@@ -28,6 +28,13 @@
             margin-left: 10px;
         }
 
+        #lblReward {
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+            margin-left: 10px;
+        }
+
         #lblQuestion {
             font-size: 24px;
             font-weight: bold;
@@ -55,6 +62,11 @@
 
             <label>Time Left</label>
             <label id="lblTimer">30</label>
+
+            <br><br>
+
+            <label>Current Reward</label>
+            <label id="lblReward">₹0</label>
 
             <div id="lblQuestion"></div>
 
@@ -212,10 +224,29 @@
             }
         ];
 
+        const rewards = [
+            "₹1,000",
+            "₹2,000",
+            "₹3,000",
+            "₹5,000",
+            "₹10,000",
+            "₹20,000",
+            "₹40,000",
+            "₹80,000",
+            "₹1,60,000",
+            "₹3,20,000",
+            "₹6,40,000",
+            "₹12,50,000",
+            "₹25,00,000",
+            "₹50,00,000",
+            "₹1 Crore"
+        ];
+
         const divstart = document.querySelector("#divStart");
         const divgame = document.querySelector("#divGame");
-        const lbltimer = document.querySelector("#lblTimer");
 
+        const lbltimer = document.querySelector("#lblTimer");
+        const lblreward = document.querySelector("#lblReward");
         const lblquestion = document.querySelector("#lblQuestion");
 
         const rda = document.querySelector("#rda");
@@ -275,6 +306,8 @@
             lblc.textContent = currentQuestion.c;
             lbld.textContent = currentQuestion.d;
 
+            lblreward.textContent = rewards[questionIndex];
+
             rda.style.display = "inline";
             rdb.style.display = "inline";
             rdc.style.display = "inline";
@@ -285,30 +318,6 @@
             startTimer();
 
             speakQuestion();
-        }
-
-        function speakQuestion() {
-            if (questionIndex < 0 || questionIndex >= questions.length) {
-                return;
-            }
-
-            const currentQuestion = questions[questionIndex];
-
-            const text =
-                currentQuestion.question +
-                ". Option A. " + currentQuestion.a +
-                ". Option B. " + currentQuestion.b +
-                ". Option C. " + currentQuestion.c +
-                ". Option D. " + currentQuestion.d + ".";
-
-            window.speechSynthesis.cancel();
-
-            const speech = new SpeechSynthesisUtterance(text);
-            speech.lang = "en-IN";
-            speech.rate = 0.85;
-            speech.pitch = 1;
-
-            window.speechSynthesis.speak(speech);
         }
 
         function checkAnswer() {
@@ -333,6 +342,14 @@
             clearInterval(timerId);
 
             window.speechSynthesis.cancel();
+
+            let wonIndex = questionIndex - 1;
+
+            if (wonIndex >= 0) {
+                lblreward.textContent = "You won " + rewards[wonIndex];
+            } else {
+                lblreward.textContent = "You won ₹0";
+            }
 
             lblquestion.textContent = message;
 
@@ -363,6 +380,31 @@
                     endKbc("Time up! KBC ended.");
                 }
             }, 1000);
+        }
+
+        function speakQuestion() {
+            if (questionIndex < 0 || questionIndex >= questions.length) {
+                return;
+            }
+
+            const currentQuestion = questions[questionIndex];
+
+            const text =
+                "Question for " + rewards[questionIndex] + ". " +
+                currentQuestion.question +
+                ". Option A. " + currentQuestion.a +
+                ". Option B. " + currentQuestion.b +
+                ". Option C. " + currentQuestion.c +
+                ". Option D. " + currentQuestion.d + ".";
+
+            window.speechSynthesis.cancel();
+
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = "en-IN";
+            speech.rate = 0.85;
+            speech.pitch = 1;
+
+            window.speechSynthesis.speak(speech);
         }
 
         function doHide(element) {
