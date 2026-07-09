@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KBC</title>
+
     <style>
         .container {
             display: flex;
@@ -15,21 +16,59 @@
         .hide {
             display: none;
         }
+
+        #lblTimer {
+            font-size: 30px;
+            font-weight: bold;
+            color: red;
+            margin-left: 10px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div id="divStart">
-            <button onclick="doHide(divstart);doShow(divgame)">Start</button>
 
+        <div id="divStart">
+            <button onclick="doHide(divstart);doShow(divgame);startTimer()">Start</button>
         </div>
+
         <div id="divGame" class="hide">
             <h1>Game</h1>
+
             <label>Time Left</label>
-            <label id="lblTimer"></label>
+            <label id="lblTimer">30</label>
+
+            <br><br>
+
+            <div>
+                <input type="radio" name="option" id="rda">
+                <label id="lbla" for="rda">Option A</label>
+            </div>
+
+            <div>
+                <input type="radio" name="option" id="rdb">
+                <label id="lblb" for="rdb">Option B</label>
+            </div>
+
+            <div>
+                <input type="radio" name="option" id="rdc">
+                <label id="lblc" for="rdc">Option C</label>
+            </div>
+
+            <div>
+                <input type="radio" name="option" id="rdd">
+                <label id="lbld" for="rdd">Option D</label>
+            </div>
+
+            <div>
+                <input type="radio" name="option" id="rde" checked>
+                <label id="lble" for="rde">No option selected</label>
+            </div>
         </div>
+
     </div>
+
     <script>
         const divstart = document.querySelector("#divStart");
         const divgame = document.querySelector("#divGame");
@@ -37,7 +76,10 @@
 
         let counter = 30;
         let timerId = null;
+
         function startTimer() {
+            clearInterval(timerId);
+
             counter = 30;
             lbltimer.textContent = counter;
 
@@ -52,17 +94,15 @@
             }, 1000);
         }
 
-
         function doHide(element) {
             element.classList.add("hide");
-
         }
+
         function doShow(element) {
             element.classList.remove("hide");
-            startTimer();
-
         }
     </script>
+
 </body>
 
 </html>
