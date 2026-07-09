@@ -27,6 +27,13 @@
             color: red;
             margin-left: 10px;
         }
+
+        #lblQuestion {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -34,7 +41,7 @@
     <div class="container">
 
         <div id="divStart">
-            <button onclick="doHide(divstart);doShow(divgame);startTimer()">Start</button>
+            <button onclick="doHide(divstart);doShow(divgame);loadNextQuestion();startTimer()">Start</button>
         </div>
 
         <div id="divGame" class="hide">
@@ -43,7 +50,7 @@
             <label>Time Left</label>
             <label id="lblTimer">30</label>
 
-            <br><br>
+            <div id="lblQuestion"></div>
 
             <div>
                 <input type="radio" name="option" id="rda">
@@ -66,6 +73,11 @@
             </div>
 
             <input type="radio" name="option" id="rde" class="hiddenRadio" checked>
+
+            <br><br>
+
+            <button onclick="alert(getSelectedAnswer())">Check Selected Answer</button>
+            <button onclick="loadNextQuestion()">Next Question</button>
         </div>
 
     </div>
@@ -198,8 +210,76 @@
         const divgame = document.querySelector("#divGame");
         const lbltimer = document.querySelector("#lblTimer");
 
+        const lblquestion = document.querySelector("#lblQuestion");
+
+        const rda = document.querySelector("#rda");
+        const rdb = document.querySelector("#rdb");
+        const rdc = document.querySelector("#rdc");
+        const rdd = document.querySelector("#rdd");
+        const rde = document.querySelector("#rde");
+
+        const lbla = document.querySelector("#lbla");
+        const lblb = document.querySelector("#lblb");
+        const lblc = document.querySelector("#lblc");
+        const lbld = document.querySelector("#lbld");
+
         let counter = 30;
         let timerId = null;
+
+        let questionIndex = -1;
+
+        function getSelectedAnswer() {
+            if (rda.checked) {
+                return "a";
+            }
+
+            if (rdb.checked) {
+                return "b";
+            }
+
+            if (rdc.checked) {
+                return "c";
+            }
+
+            if (rdd.checked) {
+                return "d";
+            }
+
+            return "";
+        }
+
+        function loadNextQuestion() {
+            questionIndex++;
+
+            if (questionIndex >= questions.length) {
+                lblquestion.textContent = "Quiz finished!";
+                lbla.textContent = "";
+                lblb.textContent = "";
+                lblc.textContent = "";
+                lbld.textContent = "";
+
+                rda.style.display = "none";
+                rdb.style.display = "none";
+                rdc.style.display = "none";
+                rdd.style.display = "none";
+
+                clearInterval(timerId);
+                return;
+            }
+
+            const currentQuestion = questions[questionIndex];
+
+            lblquestion.textContent = currentQuestion.question;
+
+            lbla.textContent = currentQuestion.a;
+            lblb.textContent = currentQuestion.b;
+            lblc.textContent = currentQuestion.c;
+            lbld.textContent = currentQuestion.d;
+
+            rde.checked = true;
+
+            startTimer();
+        }
 
         function startTimer() {
             clearInterval(timerId);
